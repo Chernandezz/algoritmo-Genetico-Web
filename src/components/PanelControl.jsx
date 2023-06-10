@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./PanelControl.module.css";
+import { Link } from "react-router-dom";
 
 const EntradaParametros = () => {
+  const [titulo, setTitulo] = useState("");
+  const handleAgregar = () => {
+    if (!titulo) {
+      alert("Por favor, ingresa un título para la ejecución");
+      return;
+    }
+    // Aquí recogeríamos todos los valores del formulario
+    // y se los pasaríamos a la función onAgregar en forma de objeto.
+    onAgregar({ titulo /* ...otros valores del formulario... */ });
+    alert(
+      'Algoritmo "' + titulo + '" agregado con éxito a la cola de ejecución.'
+    );
+  };
   return (
     <div className="container">
       <div className={style.grupoBtns}>
@@ -20,17 +34,12 @@ const EntradaParametros = () => {
           type="button"
           className={style["submit-btn"]}
           style={{ backgroundColor: "indigo" }}
-          id="btnAgregarAlgoritmo"
         >
           Agregar a la cola
         </button>
-        <button
-          type="submit"
-          className={style["submit-btn"]}
-          id="btnEjecutarAlgoritmo"
-        >
+        <Link to="/resultados" className={style["submit-btn"]}>
           Ejecutar
-        </button>
+        </Link>
       </div>
     </div>
   );
